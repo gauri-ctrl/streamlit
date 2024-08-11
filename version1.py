@@ -1,53 +1,47 @@
-def add(x, y):
-    return x + y
+# Sample data of movies
+movies = [
+    {"title": "The Matrix", "genre": "Action, Sci-Fi"},
+    {"title": "Inception", "genre": "Action, Sci-Fi"},
+    {"title": "Interstellar", "genre": "Adventure, Drama, Sci-Fi"},
+    {"title": "The Dark Knight", "genre": "Action, Crime, Drama"},
+    {"title": "Pulp Fiction", "genre": "Crime, Drama"},
+    {"title": "The Godfather", "genre": "Crime, Drama"},
+    {"title": "Schindler's List", "genre": "Biography, Drama, History"},
+    {"title": "The Lord of the Rings: The Return of the King", "genre": "Action, Adventure, Drama"},
+    {"title": "Forrest Gump", "genre": "Drama, Romance"},
+    {"title": "The Shawshank Redemption", "genre": "Drama"}
+]
 
-def subtract(x, y):
-    return x - y
+def recommend_movies(selected_genre, n_recommendations=3):
+    recommendations = []
 
-def multiply(x, y):
-    return x * y
+    # Find movies matching the selected genre
+    for movie in movies:
+        if selected_genre.lower() in movie["genre"].lower():
+            recommendations.append(movie["title"])
 
-def divide(x, y):
-    if y != 0:
-        return x / y
-    else:
-        return "Error! Division by zero."
+    # Limit the number of recommendations to the desired amount
+    return recommendations[:n_recommendations]
 
-def calculator():
-    print("Simple Calculator")
-    print("Select operation:")
-    print("1. Add")
-    print("2. Subtract")
-    print("3. Multiply")
-    print("4. Divide")
+def movie_recommendation_app():
+    print("Welcome to the Movie Recommendation App!")
+    print("Available genres: Action, Sci-Fi, Adventure, Drama, Crime, Biography, History, Romance")
 
     while True:
-        # Take input from the user
-        choice = input("Enter choice (1/2/3/4): ")
+        genre = input("\nEnter a genre to get movie recommendations (or type 'exit' to quit): ")
 
-        # Check if the choice is one of the four options
-        if choice in ['1', '2', '3', '4']:
-            num1 = float(input("Enter first number: "))
-            num2 = float(input("Enter second number: "))
-
-            if choice == '1':
-                print(f"{num1} + {num2} = {add(num1, num2)}")
-
-            elif choice == '2':
-                print(f"{num1} - {num2} = {subtract(num1, num2)}")
-
-            elif choice == '3':
-                print(f"{num1} * {num2} = {multiply(num1, num2)}")
-
-            elif choice == '4':
-                print(f"{num1} / {num2} = {divide(num1, num2)}")
-        else:
-            print("Invalid Input")
-
-        # Ask if the user wants to perform another calculation
-        next_calculation = input("Do you want to perform another calculation? (yes/no): ")
-        if next_calculation.lower() != 'yes':
+        if genre.lower() == 'exit':
+            print("Thank you for using the Movie Recommendation App!")
             break
 
+        recommendations = recommend_movies(genre)
+
+        if recommendations:
+            print("\nWe recommend these movies:")
+            for i, title in enumerate(recommendations, 1):
+                print(f"{i}. {title}")
+        else:
+            print(f"Sorry, no movies found for the genre '{genre}'.")
+
 if __name__ == "__main__":
-    calculator()
+    movie_recommendation_app()
