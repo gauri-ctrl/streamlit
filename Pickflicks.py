@@ -58,7 +58,7 @@
         # Add more categories here
     },
     # Repeat for other industries and categories
-}
+
 
 def display_movie_details(movie):
     print(f"Title: {movie['title']}")
